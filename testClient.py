@@ -15,7 +15,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((host, port))
 
 # send test message
-data = "test"
+data = '{"type" : "ping"}'
 client_socket.send(data.encode('utf-8'))
 responce = client_socket.recv(1024).decode("utf-8")
 print(f"Receved data: {responce}")
