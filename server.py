@@ -3,6 +3,7 @@ import threading
 import configparser
 import json
 import request_handler
+import cryptography
 
 # load config info
 config = configparser.ConfigParser()
@@ -38,12 +39,9 @@ def handle_client(client_socket):
     # load JSON into a python dictionary to make it usable by python
     loaded_data = json.loads(data)
 
-    # call the function in 'request_handler.py' corresponding to the request type
-    process = getattr(request_handler, "loaded_data['type']")
+    # call the function from 'request_handler.py' corresponding to the request type
+    process = getattr(request_handler, loaded_data["type"])
     return_data = process(data)
-
-    # convert response to from python dictionary to json
-    return_data = json.dumps(return_data)
 
     # send back the response from the function above
     client_socket.send(return_data.encode('utf-8'))
