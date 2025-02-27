@@ -3,7 +3,6 @@ import threading
 import configparser
 import json
 import request_handler
-import cryptography
 
 # load config info
 config = configparser.ConfigParser()
@@ -23,14 +22,6 @@ print(f"Binded server to: {host}:{port}")
 def Dprint(msg):
     if debug:
         print(msg)
-
-def encrypt(msg):
-    # to be implemented
-    return msg
-
-def decrypt(msg):
-    # to be implemented
-    return msg
 
 # Worker thread function
 def handle_client(client_socket):
