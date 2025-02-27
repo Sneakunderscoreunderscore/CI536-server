@@ -24,18 +24,18 @@ receive
 return
 ```
 {
-        "type" : "get_listing",
-        "data" : {
-            "seller" : "seller",
-            "item" : "item",
-            "price": 0,
-            "campus" : "",
-            "image_data" : image_data,
-            "listing_date" : yyyy-MM-dd HH:mm:ss,
-            "tags" : ["tag1", "tag2"],
-            "sold" : False
-        }
+    "type" : "get_listing",
+    "data" : {
+        "seller" : "seller",
+        "item" : "item",
+        "price": 0,
+        "campus" : "",
+        "image_data" : image_data,
+        "listing_date" : yyyy-MM-dd HH:mm:ss,
+        "tags" : ["tag1", "tag2"],
+        "sold" : False
     }
+}
 ```
 
 ### search
@@ -44,10 +44,10 @@ receive
 {
     "type" : "search",
     "data" : {
-        "search_term" : "", <- the term used to search the database
-        "to_load" : 5, <- the number of items to return
-        "loaded" : , <- the id of the last loaded item
-        "filters" : ["tag:tag1", "tag:tag2", "after:yyyy-MM-dd HH:mm:ss"] <- a list of filters like tags dates, etc
+        "search_term" : "",
+        "to_load" : 5,
+        "loaded" : 5,
+        "filters" : ["tag:tag1", "tag:tag2", "after:yyyy-MM-dd HH:mm:ss"]
     }
 }
 ```
@@ -56,10 +56,10 @@ return
 {
     "type" : "search",
     "data" : {
-        "search_term" : "", <- the term used to search the database
-        "to_load" : 5, <- the number of items to return
-        "loaded" : , <- the id of the last loaded item
-        "tags" : ["tag1", "tag2"] <- a list of tags to search for
+        "search_term" : "",
+        "to_load" : 5,
+        "loaded" : ,
+        "tags" : ["tag1", "tag2"]
     }
 }
 ```
