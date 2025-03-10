@@ -11,6 +11,16 @@ receive and return
     "type" : "ping"
 }
 ```
+### login
+### create account
+### delete account
+### change password
+### change name
+### get account
+### get contact
+### create listing
+### edit listing
+### remove listing
 ### get listing
 receive
 ```
@@ -47,7 +57,7 @@ receive
         "search_term" : "",
         "to_load" : 5,
         "loaded" : 5,
-        "filters" : ["tag:tag1", "tag:tag2", "after:yyyy-MM-dd HH:mm:ss"]
+        "filters" : ["campus=tag1", "price<1000", "yyyy-MM-dd HH:mm:ss"]
     }
 }
 ```
@@ -63,4 +73,3 @@ return
     }
 }
 ```
-
