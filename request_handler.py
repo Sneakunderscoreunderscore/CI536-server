@@ -24,7 +24,6 @@ def decrypt(msg):
     return msg
 
 # execute a command to the database
-# execute a command to the database
 def db_execute(statement, return_num):
     print(statement)
     # open the database
@@ -65,6 +64,18 @@ def ping(data):
     return_data = json.dumps(return_data)
     return(return_data)
 
+def request_public_key(data):
+    key = open("keys/private_key.pem", "rb")
+    public_key = serialization.load_pem_public_key(key,backend=default_backend())
+    return_data = {
+        "type" : "request_public_key",
+        "data" : {
+            "key" : public_key
+        }
+    }
+    return_data = json.dumps(return_data)
+    return(return_data)
+
 def get_listing(data):
     seller = null # some sql stuff
     item = null
@@ -87,17 +98,19 @@ def get_listing(data):
     return(return_data) 
 
 def get_account(data):
-    #some sql stuff
+    # setup sql statement
+    statement = f"SELECT * FROM tbAccounts WHERE accID = {data["accID"]}"
+    account_data = db_execute(statement, 1)
     return_data = {
-        "type" : "login",
+        "type" : "get_account",
         "data" : {
-            "accid" : accid,
-            "name" : name,
-            "course": course,
-            "campus" : campus,
-            "pfp_data" : pfp_data,
-            "sales" : sales,
-            "contact" : contact
+            "accID" : account_data[1][1],
+            "name" : account_data[1][2],
+            "course": account_data[1][3],
+            "campus" : account_data[1][4],
+            "pfp_data" : account_data[1][5],
+            "sales" : account_data[1][6],
+            "contact" : account_data[1][7],
         }
     }
     return_data = json.dumps(return_data)
@@ -123,7 +136,9 @@ def search(data):
     # setup the sql statement
     statement = f"SELECT * FROM tbItems WHERE itemID>{data["last_loaded"]}"
     filters = data["filters"]
+    # if there are filters
     if len(filters) != 0:
+        # add them to the sql statement
         for i in filter:
             statement+=f"AND {i}"
 
