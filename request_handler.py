@@ -104,13 +104,13 @@ def get_account(data):
     return_data = {
         "type" : "get_account",
         "data" : {
-            "accID" : account_data[1][1],
-            "name" : account_data[1][2],
-            "course": account_data[1][3],
-            "campus" : account_data[1][4],
-            "pfp_data" : account_data[1][5],
-            "sales" : account_data[1][6],
-            "contact" : account_data[1][7],
+            "accID" : account_data[0][0],
+            "name" : account_data[0][1],
+            "course": account_data[0][2],
+            "campus" : account_data[0][3],
+            "pfp_data" : account_data[0][4],
+            "sales" : account_data[0][5],
+            "contact" : account_data[0][6],
         }
     }
     return_data = json.dumps(return_data)
