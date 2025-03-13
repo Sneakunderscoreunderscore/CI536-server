@@ -16,7 +16,7 @@ port = config.getint("General", "port")
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((host, port))
 server_socket.listen(5)
-print(f"Binded server to: {host}:{port}")
+print(f"Bound server to: {host}:{port}")
 
 # debug printing function
 def Dprint(msg):
