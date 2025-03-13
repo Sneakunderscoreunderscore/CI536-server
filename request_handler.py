@@ -77,23 +77,27 @@ def request_public_key(data):
     return(return_data)
 
 def get_listing(data):
-    seller = null # some sql stuff
-    item = null
-    price = null
-    campus = null
-    image_data = null
-    listing_date = null
+    # get needed data from the database
+    listing = db_execute(f"SELECT * FROM tbItems WHERE itemID = {data["listing_id"]}", 1)
+    seller = db_execute(f"SELECT Name FROM tbAccounts WHERE accID={listings[i][1]}",1)
+    # fill in return data
     return_data = {
         "type" : "get_listing",
         "data" : {
-            "seller" : seller,
-            "item" : item,
-            "price": price,
-            "campus" : campus,
-            "image_data" : image_data,
-            "listing_date" : listing_date
+            "id" : listings[0][0],
+            "seller_id" : listings[0][1],
+            "seller_name" : seller[0][0],
+            "item" : listings[0][2],
+            "price": listings[0][3],
+            "quantity" : listings[0][4],
+            "campus" : listings[0][5],
+            "image_data" : listings[0][5],
+            "description" : listings[0][6],
+            "listing_date" : listings[0][7],
+            "tags" : listings[0][8],
+            "sold" : listings[0][9]
         }
-    }
+    },
     return_data = json.dumps(return_data)
     return(return_data) 
 
@@ -134,7 +138,7 @@ def search(data):
     }
 
     # setup the sql statement
-    statement = f"SELECT * FROM tbItems WHERE itemID>{data["last_loaded"]}"
+    statement = f"SELECT * FROM tbItems WHERE name LIKE '%{data["search_term"]}%' AND itemID>{data["last_loaded"]}"
     filters = data["filters"]
     # if there are filters
     if len(filters) != 0:

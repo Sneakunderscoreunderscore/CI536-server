@@ -56,8 +56,8 @@ receive
     "data" : {
         "search_term" : "",
         "to_load" : 5,
-        "loaded" : 5,
-        "filters" : ["campus=tag1", "price<1000", "yyyy-MM-dd HH:mm:ss"]
+        "loaded" : 0,
+        "filters" : ["campus=city", "price<1000", "yyyy-MM-dd HH:mm:ss"]
     }
 }
 ```
