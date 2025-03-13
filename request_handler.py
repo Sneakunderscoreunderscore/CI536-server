@@ -143,7 +143,7 @@ def search(data):
             statement+=f"AND {i}"
 
     # retrieve data from the database about listings
-    listings = db_execute(statement, data["to_load"]+1) # +1 to account for 'fetchmany' starting at 1
+    listings = db_execute(statement, data["to_load"])
     # fill in the "data" area of the return statement with listings retrieved from the database
 
     for i in range(0,data["to_load"]):
