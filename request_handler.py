@@ -1,5 +1,6 @@
 import json
 import sqlite3
+import uuid
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 
@@ -122,11 +123,18 @@ def get_account(data):
 
 
 def login(data):
-    #some sql stuff
-    return_data = {
-        "type" : "login",
-        "data" : ""
-    }
+    # get password from DB form the account name given
+    password = db_execute(f"SELECT password FROM tbAccounts WHERE userName={data["name"]}", 1)[0]
+    # if the password is correct send a validation key (for some requests this is used to prove the user is logged in)
+    if(data["password"] == decrypt(password[0])):
+        return_data = {
+            "type" : "login",
+            "data" : {
+                "success" : True,
+                "error" : 0,
+                "validation_key" : uuid.uuid4().hex
+            }
+        }
     return_data = json.dumps(return_data)
     return(return_data) 
 
