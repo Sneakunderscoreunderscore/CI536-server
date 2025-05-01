@@ -121,18 +121,24 @@ def get_account(data):
     return_data = json.dumps(return_data)
     return(return_data) 
 
+def create_account(data):
 
+def create_listing(data)
+
+#
+# TO DO
+#
 def login(data):
+
     # get password from DB form the account name given
     password = db_execute(f"SELECT password FROM tbAccounts WHERE userName={data["name"]}", 1)[0]
     # if the password is correct send a validation key (for some requests this is used to prove the user is logged in)
-    if(data["password"] == decrypt(password[0])):
+    if (decrypt(data["password"]) == decrypt(password[0])):
         return_data = {
             "type" : "login",
             "data" : {
                 "success" : True,
                 "error" : 0,
-                "validation_key" : uuid.uuid4().hex
             }
         }
     return_data = json.dumps(return_data)
@@ -182,6 +188,7 @@ def search(data):
     return_data = json.dumps(return_data)
     return(return_data) 
 
+#example
 def n(data):
     #some sql stuff
     return_data = {

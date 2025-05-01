@@ -12,15 +12,33 @@ receive and return
 }
 ```
 ### login
+receive
+```
+{
+    "type" : login
+    "data" : {     <-- data should be all encrypted
+        "name" : "",
+        "password" : ""
+    }
+}
+```
 ### create account
+{
+    "type" : "create_account",
+    "data" : {
+        "name" :,
+        "password" :,
+        
+    }
+}
 ### delete account
-### change password
-### change name
+
 ### get account
-### get contact
+
 ### create listing
-### edit listing
+
 ### remove listing
+
 ### get listing
 receive
 ```
