@@ -115,13 +115,31 @@ def get_account(data):
             "campus" : account_data[0][3],
             "pfp_data" : account_data[0][4],
             "sales" : account_data[0][5],
-            "contact" : account_data[0][6],
+            "contact" : account_data[0][6]
         }
     }
     return_data = json.dumps(return_data)
     return(return_data) 
 
 def create_account(data):
+    # setup sql statement to find most recent accID used
+    statement = f"SELECT accID FROM tbAccounts SORT descending"
+    account_data = db_execute(statement, 1)
+    return_data = {
+        "type" : "create_account",
+        "data" : {
+            "error" : 0,
+            "accID" : account_data[0][0],
+            "name" : account_data[0][1],
+            "course": account_data[0][2],
+            "campus" : account_data[0][3],
+            "pfp_data" : account_data[0][4],
+            "sales" : 0,
+            "contact" : account_data[0][6]
+        }
+    }
+    return_data = json.dumps(return_data)
+    return(return_data) 
 
 def create_listing(data)
 
@@ -133,14 +151,18 @@ def login(data):
     # get password from DB form the account name given
     password = db_execute(f"SELECT password FROM tbAccounts WHERE userName={data["name"]}", 1)[0]
     # if the password is correct send a validation key (for some requests this is used to prove the user is logged in)
-    if (decrypt(data["password"]) == decrypt(password[0])):
+    if (hash(decrypt(data["password"])) == password[0]):
+        # create a validation key
+        key = uuid.uuid4()
         return_data = {
             "type" : "login",
             "data" : {
                 "success" : True,
-                "error" : 0,
+                "key" : key
             }
         }
+    # save the key to the account DB
+
     return_data = json.dumps(return_data)
     return(return_data) 
 

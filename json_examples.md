@@ -23,18 +23,56 @@ receive
 }
 ```
 ### create account
+receive
+```
+{
+    "type" : "create_account",
+    "data" : { <-- encrypted
+        "name" : ,
+        "course": ,
+        "campus" : ,
+        "pfp_data" : ,
+        "contact" : 
+        "password" : 
+    }
+}
+```
+return
+```
 {
     "type" : "create_account",
     "data" : {
-        "name" :,
-        "password" :,
-        
+        "error" : 0-1, <-- 0/1 if there was a problem
+        "accID" : ,
+        "name" : ,
+        "course": ,
+        "campus" : ,
+        "pfp_data" : ,
+        "sales" : 0,
+        "contact" : 
     }
 }
+```
 ### delete account
 
 ### get account
 
+return
+```
+{
+    "type" : "get_account",
+    "data" : {
+        "error" : 0-1, <-- 0/1 if there was a problem
+        "accID" : ,
+        "name" : ,
+        "course": ,
+        "campus" : ,
+        "pfp_data" : ,
+        "sales" : 0,
+        "contact" : 
+    }
+}
+```
 ### create listing
 
 ### remove listing
